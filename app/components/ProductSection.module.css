@@ -1,0 +1,116 @@
+/* components/ProductSection.module.css */
+.contentWrapper {
+    display: flex;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    gap: 2rem;
+    position: relative;
+  }
+  
+  .filterToggleBtn {
+    position: absolute;
+    top: 0;
+    left: 2rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #666;
+    padding: 0.5rem 0;
+  }
+  
+  .filterToggleBtn:hover {
+    color: #000;
+  }
+  
+  .productGrid {
+    display: grid;
+    gap: 2rem;
+    flex: 1;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .filtersHidden .productGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .imageContainer {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    background: #f8f8f8;
+  }
+  
+  .productImage {
+    object-fit: contain;
+    padding: 1rem;
+  }
+  
+  .productInfo {
+    padding: 1rem;
+  }
+  
+  .productTitle {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #333;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 2.8em;
+  }
+  
+  .productMeta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .price {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #000;
+  }
+  
+  .rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .stars {
+    color: #ffc107;
+    letter-spacing: -1px;
+  }
+  
+  .ratingCount {
+    color: #666;
+    font-size: 0.875rem;
+  }
+  
+  @media (max-width: 1200px) {
+    .productGrid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .filtersHidden .productGrid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .productGrid,
+    .filtersHidden .productGrid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .contentWrapper {
+      padding: 1rem;
+    }
+  }
