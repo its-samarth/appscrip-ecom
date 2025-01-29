@@ -1,4 +1,5 @@
-
+'use client';
+import { useState } from 'react';
 import Image from 'next/image';
 import { Suspense } from 'react';
 import Filters from './components/Filters';
@@ -25,15 +26,55 @@ async function getCategories() {
   }
 }
 
-export default async function Home() {
-  const [products, categories] = await Promise.all([getProducts(), getCategories()]);
+export default function Home() {
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  
+  // Fetch data on component mount
+  useState(() => {
+    const fetchData = async () => {
+      const [productsData, categoriesData] = await Promise.all([getProducts(), getCategories()]);
+      setProducts(productsData);
+      setCategories(categoriesData);
+    };
+    fetchData();
+  }, []);
+
+  const handleFilterChange = async (category) => {
+    // Implement filter logic
+    const filteredProducts = category === 'all' 
+      ? await getProducts()
+      : await fetch(`https://fakestoreapi.com/products/category/${category}`).then(res => res.json());
+    setProducts(filteredProducts);
+  };
+
+  const handleSortChange = (sortType) => {
+    const sortedProducts = [...products];
+    switch (sortType) {
+      case 'price-low-high':
+        sortedProducts.sort((a, b) => a.price - b.price);
+        break;
+      case 'price-high-low':
+        sortedProducts.sort((a, b) => b.price - a.price);
+        break;
+      default:
+        // Reset to original order for 'recommended'
+        getProducts().then(setProducts);
+        return;
+    }
+    setProducts(sortedProducts);
+  };
 
   return (
     <main className={styles.main}>
       <header className={styles.header}>
         <div className={styles.logo}>LOGO</div>
         <nav className={styles.nav}>
-          <button className={styles.menuBtn}>
+          <button 
+            className={styles.menuBtn}
+            onClick={() => setIsFilterOpen(!isFilterOpen)}
+          >
             <Image src="/window.svg" alt="Menu" width={24} height={24} />
           </button>
           <button className={styles.globeBtn}>
@@ -50,19 +91,13 @@ export default async function Home() {
       </div>
 
       <div className={styles.contentWrapper}>
-        <aside className={styles.sidebar}>
-          <div className={styles.filterContainer}>
-            <Filters 
-              categories={categories}
-              onFilterChange={async (category) => {
-                'use server';
-              }}
-              onSortChange={async (sortType) => {
-                'use server';
-              }}
-            />
-          </div>
-        </aside>
+        <Filters
+          categories={categories}
+          onFilterChange={handleFilterChange}
+          onSortChange={handleSortChange}
+          isOpen={isFilterOpen}
+          onToggle={() => setIsFilterOpen(!isFilterOpen)}
+        />
 
         <section className={styles.productGrid}>
           <Suspense fallback={<div>Loading products...</div>}>
@@ -95,7 +130,7 @@ export default async function Home() {
           </Suspense>
         </section>
       </div>
-      <Footer/>
+      <Footer />
     </main>
   );
 }

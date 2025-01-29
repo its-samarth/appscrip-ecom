@@ -1,10 +1,14 @@
+// components/Filters.js
 'use client';
 import { useState } from 'react';
 import styles from './Filters.module.css';
+import Image from 'next/image';
 
-export default function Filters({ categories, onFilterChange, onSortChange }) {
+const Filters = ({ categories, onFilterChange, onSortChange, isOpen, onToggle }) => {
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [sortBy, setSortBy] = useState('recommended');
+  const [selectedSort, setSelectedSort] = useState('recommended');
+  const [selectedGender, setSelectedGender] = useState('all');
+  const [selectedType, setSelectedType] = useState('all');
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
@@ -12,64 +16,111 @@ export default function Filters({ categories, onFilterChange, onSortChange }) {
   };
 
   const handleSortChange = (sortType) => {
-    setSortBy(sortType);
+    setSelectedSort(sortType);
     onSortChange(sortType);
   };
 
   return (
-    <div className={styles.filtersContainer}>
-      <div className={styles.leftFilters}>
-        <div className={styles.filterGroup}>
-          <span className={styles.filterLabel}>CATEGORIES</span>
-          <div className={styles.categoryList}>
-            <button 
-              className={`${styles.categoryBtn} ${selectedCategory === 'all' ? styles.active : ''}`}
-              onClick={() => handleCategoryChange('all')}
-            >
-              All Products
-            </button>
-            {categories.map((category) => (
-              <button
-                key={category}
-                className={`${styles.categoryBtn} ${selectedCategory === category ? styles.active : ''}`}
-                onClick={() => handleCategoryChange(category)}
-              >
-                {category.toUpperCase()}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div className={styles.filterGroup}>
-          <span className={styles.filterLabel}>PRICE RANGE</span>
-          <div className={styles.priceRange}>
-            <button className={styles.priceBtn}>$0 - $50</button>
-            <button className={styles.priceBtn}>$50 - $100</button>
-            <button className={styles.priceBtn}>$100+</button>
-          </div>
-        </div>
-        <div className={styles.filterGroup}>
-          <span className={styles.filterLabel}>RATING</span>
-          <div className={styles.ratingFilter}>
-            {[4, 3, 2, 1].map((stars) => (
-              <button key={stars} className={styles.ratingBtn}>
-                {stars}+ ★
-              </button>
-            ))}
-          </div>
+    <div className={`${styles.filtersWrapper} ${isOpen ? styles.open : ''}`}>
+      <div className={styles.filterHeader}>
+        <h3>Filters</h3>
+        <button onClick={onToggle} className={styles.closeButton}>
+          {isOpen ? '✕' : '☰'}
+        </button>
+      </div>
+
+      <div className={styles.filterSection}>
+        <h4>Sort By</h4>
+        <div className={styles.filterOptions}>
+          <label>
+            <input
+              type="radio"
+              name="sort"
+              value="recommended"
+              checked={selectedSort === 'recommended'}
+              onChange={() => handleSortChange('recommended')}
+            />
+            Recommended
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="sort"
+              value="price-low-high"
+              checked={selectedSort === 'price-low-high'}
+              onChange={() => handleSortChange('price-low-high')}
+            />
+            Price: Low to High
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="sort"
+              value="price-high-low"
+              checked={selectedSort === 'price-high-low'}
+              onChange={() => handleSortChange('price-high-low')}
+            />
+            Price: High to Low
+          </label>
         </div>
       </div>
-      <div className={styles.sortFilter}>
-        <select 
-          className={styles.sortSelect}
-          value={sortBy}
-          onChange={(e) => handleSortChange(e.target.value)}
-        >
-          <option value="recommended">RECOMMENDED</option>
-          <option value="price-low">PRICE: LOW TO HIGH</option>
-          <option value="price-high">PRICE: HIGH TO LOW</option>
-          <option value="rating">HIGHEST RATED</option>
-        </select>
+
+      <div className={styles.filterSection}>
+        <h4>Category</h4>
+        <div className={styles.filterOptions}>
+          {categories.map((category) => (
+            <label key={category}>
+              <input
+                type="radio"
+                name="category"
+                value={category}
+                checked={selectedCategory === category}
+                onChange={() => handleCategoryChange(category)}
+              />
+              {category.charAt(0).toUpperCase() + category.slice(1)}
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <div className={styles.filterSection}>
+        <h4>Gender</h4>
+        <div className={styles.filterOptions}>
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              value="all"
+              checked={selectedGender === 'all'}
+              onChange={() => setSelectedGender('all')}
+            />
+            All
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              value="men"
+              checked={selectedGender === 'men'}
+              onChange={() => setSelectedGender('men')}
+            />
+            Men
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              value="women"
+              checked={selectedGender === 'women'}
+              onChange={() => setSelectedGender('women')}
+            />
+            Women
+          </label>
+        </div>
       </div>
     </div>
   );
-}
+};
+
+export default Filters;
+
