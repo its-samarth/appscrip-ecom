@@ -178,3 +178,33 @@
     padding: 2rem 1rem;
   }
 }
+
+.filterToggle {
+  position: fixed;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1001;
+  background: white;
+  border: 1px solid #eaeaea;
+  padding: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.contentWrapper {
+  position: relative;
+  min-height: calc(100vh - 200px);
+}
+
+@media (max-width: 768px) {
+  .filterToggle {
+    bottom: 1rem;
+    top: auto;
+    transform: none;
+  }
+}

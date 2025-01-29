@@ -1,105 +1,69 @@
-.filtersContainer {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem 2rem;
-    border-bottom: 1px solid #eaeaea;
-    background: #fff;
-  }
-  
-  .leftFilters {
-    display: flex;
-    gap: 2rem;
-  }
-  
-  .filterGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .filterLabel {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #666;
-  }
-  
-  .categoryList {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .categoryBtn {
-    background: none;
-    border: none;
-    text-align: left;
-    padding: 0.25rem 0;
-    cursor: pointer;
-    font-size: 0.875rem;
-    color: #333;
-    transition: color 0.2s;
-  }
-  
-  .categoryBtn:hover {
-    color: #000;
-  }
-  
-  .categoryBtn.active {
-    color: #000;
-    font-weight: 600;
-  }
-  
-  .priceRange, .ratingFilter {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .priceBtn, .ratingBtn {
-    background: none;
-    border: 1px solid #eaeaea;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    font-size: 0.875rem;
-    border-radius: 4px;
-    transition: all 0.2s;
-  }
-  
-  .priceBtn:hover, .ratingBtn:hover {
-    background: #f5f5f5;
-  }
-  
-  .sortSelect {
-    padding: 0.5rem 2rem 0.5rem 1rem;
-    border: 1px solid #eaeaea;
-    border-radius: 4px;
-    background: #fff;
-    cursor: pointer;
-    font-size: 0.875rem;
-    appearance: none;
-    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23333' stroke-width='2' class='bi bi-chevron-down'%3E%3Cpath d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.5rem center;
-    background-size: 12px;
-  }
-  
-  @media (max-width: 768px) {
-    .filtersContainer {
-      flex-direction: column;
-      gap: 1rem;
-      padding: 1rem;
-    }
-  
-    .leftFilters {
-      flex-direction: column;
-      gap: 1rem;
-    }
-  
-    .sortFilter {
-      width: 100%;
-    }
-  
-    .sortSelect {
-      width: 100%;
-    }
-  }
+
+.filtersWrapper {
+  background: white;
+  padding: 1.5rem;
+  border-right: 1px solid #eaeaea;
+  height: 100%;
+  position: fixed;
+  left: -300px;
+  top: 0;
+  width: 300px;
+  transition: left 0.3s ease;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.open {
+  left: 0;
+}
+
+.filterHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-top: 1rem;
+}
+
+.filterHeader h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.filterSection {
+  margin-bottom: 2rem;
+}
+
+.filterSection h4 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.filterOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.filterOptions label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.filterOptions input[type="radio"] {
+  margin: 0;
+}
