@@ -67,3 +67,47 @@
 .filterOptions input[type="radio"] {
   margin: 0;
 }
+
+.filtersWrapper {
+  width: 150px;
+  padding: 1rem;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.filterHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.filterSection {
+  margin-bottom: 1.5rem;
+}
+
+.filterSection h4 {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+}
+
+.filterOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filterOptions label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #666;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}

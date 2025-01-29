@@ -90,15 +90,23 @@ export default function Home() {
         </p>
       </div>
 
-      <div className={styles.contentWrapper}>
-        <Filters
-          categories={categories}
-          onFilterChange={handleFilterChange}
-          onSortChange={handleSortChange}
-          isOpen={isFilterOpen}
-          onToggle={() => setIsFilterOpen(!isFilterOpen)}
-        />
-
+      <div className={`${styles.contentWrapper} ${!isFilterOpen ? styles.filtersHidden : ''}`}>
+  <button 
+    className={styles.filterToggleBtn}
+    onClick={() => setIsFilterOpen(!isFilterOpen)}
+  >
+    {isFilterOpen ? 'Hide Filters' : 'Show Filters'}
+  </button>
+  
+  {isFilterOpen && (
+    <Filters
+      categories={categories}
+      onFilterChange={handleFilterChange}
+      onSortChange={handleSortChange}
+      isOpen={isFilterOpen}
+      onToggle={() => setIsFilterOpen(!isFilterOpen)}
+    />
+  )}
         <section className={styles.productGrid}>
           <Suspense fallback={<div>Loading products...</div>}>
             {products.map((product) => (
