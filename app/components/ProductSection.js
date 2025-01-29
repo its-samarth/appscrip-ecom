@@ -59,6 +59,7 @@ export default function ProductSection({ initialProducts, categories }) {
 
   return (
     <div className={`${styles.contentWrapper} ${!isFilterOpen ? styles.filtersHidden : ''}`}>
+      <div className={styles.spaced}>
       <button 
         className={styles.filterToggleBtn}
         onClick={() => setIsFilterOpen(!isFilterOpen)}
@@ -80,6 +81,7 @@ export default function ProductSection({ initialProducts, categories }) {
           onToggle={() => setIsFilterOpen(!isFilterOpen)}
         />
       )}
+      </div>
 
       <section 
         className={styles.productGrid}
