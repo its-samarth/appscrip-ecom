@@ -1,7 +1,9 @@
+
 import Image from 'next/image';
 import { Suspense } from 'react';
 import Filters from './components/Filters';
 import styles from './page.module.css';
+import Footer from './components/Footer';
 
 async function getProducts() {
   try {
@@ -93,6 +95,7 @@ export default async function Home() {
           </Suspense>
         </section>
       </div>
+      <Footer/>
     </main>
   );
 }
