@@ -7,7 +7,6 @@ import Image from 'next/image';
 const Filters = ({ categories, onFilterChange, onSortChange, isOpen, onToggle }) => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedSort, setSelectedSort] = useState('recommended');
-  const [selectedGender, setSelectedGender] = useState('all');
   const [selectedType, setSelectedType] = useState('all');
 
   const handleCategoryChange = (category) => {
@@ -83,41 +82,7 @@ const Filters = ({ categories, onFilterChange, onSortChange, isOpen, onToggle })
         </div>
       </div>
 
-      <div className={styles.filterSection}>
-        <h4>Gender</h4>
-        <div className={styles.filterOptions}>
-          <label>
-            <input
-              type="radio"
-              name="gender"
-              value="all"
-              checked={selectedGender === 'all'}
-              onChange={() => setSelectedGender('all')}
-            />
-            All
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="gender"
-              value="men"
-              checked={selectedGender === 'men'}
-              onChange={() => setSelectedGender('men')}
-            />
-            Men
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="gender"
-              value="women"
-              checked={selectedGender === 'women'}
-              onChange={() => setSelectedGender('women')}
-            />
-            Women
-          </label>
-        </div>
-      </div>
+      
     </div>
   );
 };
