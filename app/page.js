@@ -4,6 +4,7 @@ import { Metadata } from 'next';
 import ProductSection from './components/ProductSection';
 import styles from './page.module.css';
 import Footer from './components/Footer';
+import HotjarTracker from './components/HotjarTracker';
 
 // Dynamic metadata generation
 export async function generateMetadata() {
@@ -76,6 +77,7 @@ export default async function Home() {
           __html: JSON.stringify(organizationSchema)
         }}
       />
+      <HotjarTracker />
       
       <main className={styles.main}>
         <header className={styles.header}>
